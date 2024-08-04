@@ -54,10 +54,4 @@ The application uses a soothing and visually appealing color palette:
 
 Contributions are welcome! Please open an issue or submit a pull request with your improvements.
 
-## License
 
-This project is licensed under the MIT License.
-
----
-
-Feel free to adjust any details as necessary for your project!
