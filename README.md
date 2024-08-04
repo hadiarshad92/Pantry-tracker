@@ -1,7 +1,6 @@
 # Pantry-tracker
 
-live Demo: https://pantry-tracker-iota-red.vercel.app/
-
+live Demo: https://pantry-tracker-lime-seven.vercel.app/
 
 Pantry Tracker is a web application designed to manage inventory efficiently. Built with Next.js and Material-UI, this application allows you to add new items, set their quantities, and manage existing inventory by increasing or decreasing the quantities. The application also integrates Firebase for data storage.
 
