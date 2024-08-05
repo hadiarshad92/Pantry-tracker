@@ -9,7 +9,7 @@ import exp from "constants";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBKZlyYtUgFttL_KpDeiUOzUacEYkFv62c",
+  apiKey: process.env.API_KEY,
   authDomain: "pantry-tracker-caeb7.firebaseapp.com",
   projectId: "pantry-tracker-caeb7",
   storageBucket: "pantry-tracker-caeb7.appspot.com",
