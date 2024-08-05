@@ -51,8 +51,7 @@ The application uses a soothing and visually appealing color palette:
    - Create a `firebase.js` file in the project root and add your Firebase configuration.
 
 5. Create a .env file in the project root and add your Firebase        
-    configuration. Here is an example of what your .env file should    
-    look like:
+configuration. Here is an example of what your .env file should look like:
     ```plaintext
     API_KEY=your-firebase-api-key
     ```
