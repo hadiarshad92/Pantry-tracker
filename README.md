@@ -1,6 +1,9 @@
+Certainly! Here's how you can add a description about the `.env` file in your `README.md`:
+
+````markdown
 # Pantry-tracker
 
-live Demo: https://pantry-tracker-lime-seven.vercel.app/
+Live Demo: [https://pantry-tracker-lime-seven.vercel.app/](https://pantry-tracker-lime-seven.vercel.app/)
 
 Pantry Tracker is a web application designed to manage inventory efficiently. Built with Next.js and Material-UI, this application allows you to add new items, set their quantities, and manage existing inventory by increasing or decreasing the quantities. The application also integrates Firebase for data storage.
 
@@ -17,8 +20,8 @@ Pantry Tracker is a web application designed to manage inventory efficiently. Bu
 - **Material-UI:** A popular React UI framework for designing clean and modern interfaces.
 - **Firebase:** Used for real-time database and storage.
 
-
 ## Color Scheme
+
 The application uses a soothing and visually appealing color palette:
 
 - Background: #CCD5AE
@@ -27,15 +30,14 @@ The application uses a soothing and visually appealing color palette:
 - Modal Background: #FEFAE0
 - Item and Quantity Background: White (#FFFFFF)
 
-
-
-
 ## Installation
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/pantry-tracker.git
    ```
+````
+
 2. Navigate to the project directory:
    ```bash
    cd pantry-tracker
@@ -48,9 +50,16 @@ The application uses a soothing and visually appealing color palette:
 
    - Create a Firebase project in the Firebase console.
    - Set up Firestore and obtain your Firebase configuration.
-   - Create a `firebase.js` file in the project root and add your Firebase configuration.
+   - Create a `.env` file in the project root and add your Firebase configuration as environment variables.
 
-5. Start the development server:
+5. Create a `.env` file in the project root and add your Firebase configuration. Here is an example of what your `.env` file should look like:
+
+   ```plaintext
+   API_KEY=your-firebase-api-key
+
+   ```
+
+6. Start the development server:
    ```bash
    npm run dev
    ```
@@ -70,3 +79,4 @@ _Home Screen of Pantry Tracker._
 ## Contributing
 
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
+
