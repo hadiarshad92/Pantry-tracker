@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-// import styles from "./page.module.css";
 import { useState, useEffect } from "react";
 import { firestore } from "@/firebase";
 import {
@@ -10,6 +9,8 @@ import {
   TextField,
   Typography,
   Button,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import {
   collection,
@@ -28,6 +29,10 @@ export default function Home() {
   const [itemName, setItemName] = useState("");
   const [itemQuantity, setItemQuantity] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const updateInventory = async () => {
     const snapshot = query(collection(firestore, "pantry"));
@@ -95,23 +100,23 @@ export default function Home() {
   return (
     <Box
       width="100vw"
-      height="100vh"
+      minHeight="100vh"
       display="flex"
       flexDirection="column"
       justifyContent="flex-start"
       alignItems="center"
       gap={2}
-      sx={{ backgroundColor: "#FEFAE0" }} // Light blue background
+      sx={{ backgroundColor: "#FEFAE0" }}
     >
       <Box
         width="100%"
-        bgcolor="#CCD5AE" // Royal blue background for the header
+        bgcolor="#CCD5AE"
         display="flex"
         alignItems="center"
         justifyContent="center"
         padding={2}
       >
-        <Typography variant="h2" color="black">
+        <Typography variant={isSmallScreen ? "h4" : "h2"} color="black">
           Inventory Management
         </Typography>
       </Box>
@@ -120,7 +125,7 @@ export default function Home() {
           position="absolute"
           top="50%"
           left="50%"
-          width={400}
+          width={isSmallScreen ? "90%" : isMediumScreen ? 400 : 600}
           bgcolor="white"
           border="2px solid #000"
           boxShadow={24}
@@ -151,22 +156,33 @@ export default function Home() {
                 setItemQuantity(Number(e.target.value));
               }}
             />
-            <Button variant="outlined" onClick={handleAddItem}>
+            <Button
+              variant="outlined"
+              onClick={handleAddItem}
+              sx={{ width: isSmallScreen ? "100%" : "auto" }}
+            >
               Add
             </Button>
           </Stack>
         </Box>
       </Modal>
       <Stack
-        direction="row"
-        spacing={3}
+        direction={isSmallScreen ? "column" : "row"}
+        spacing={isSmallScreen ? 2 : 3}
         alignItems="center"
         sx={{ marginTop: 2 }}
+        width="100%"
+        justifyContent="center"
       >
         <Button
           variant="contained"
           onClick={handleOpen}
-          sx={{ height: "56px", backgroundColor: "#4169e1", color: "white" }} // Royal blue button
+          sx={{
+            height: "56px",
+            width: isSmallScreen ? "80%" : isMediumScreen ? "200px" : "auto",
+            backgroundColor: "#4169e1",
+            color: "white",
+          }}
         >
           Add New Item
         </Button>
@@ -175,14 +191,18 @@ export default function Home() {
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          sx={{ width: "200px", height: "56px", backgroundColor: "white" }}
+          sx={{
+            width: isSmallScreen ? "80%" : isMediumScreen ? "300px" : "200px",
+            height: "56px",
+            backgroundColor: "white",
+          }}
         />
       </Stack>
       <Box
         border="1px solid #333"
         sx={{
-          width: "950px",
-          backgroundColor: "#f0f8ff", // Light blue background
+          width: isSmallScreen ? "90%" : isMediumScreen ? "80%" : "950px",
+          backgroundColor: "#f0f8ff",
           marginTop: 2,
         }}
       >
@@ -200,7 +220,7 @@ export default function Home() {
 
         <Stack
           height="400px"
-          width="950px"
+          width="100%"
           spacing={2}
           overflow="auto"
           padding={2}
@@ -211,7 +231,13 @@ export default function Home() {
               width="100%"
               minHeight="10px"
               display="grid"
-              gridTemplateColumns="2fr 1fr 3fr"
+              gridTemplateColumns={
+                isSmallScreen
+                  ? "1fr 1fr"
+                  : isMediumScreen
+                  ? "2fr 1fr 2fr"
+                  : "2fr 1fr 3fr"
+              }
               alignItems="center"
               bgcolor="white"
               padding={2}
@@ -223,13 +249,22 @@ export default function Home() {
               <Typography variant="h6" color="#333" textAlign="center">
                 {quantity}
               </Typography>
-              <Stack direction="row" spacing={2} justifyContent="flex-end">
+              <Stack
+                direction="row"
+                spacing={2}
+                justifyContent="flex-end"
+                sx={{ display: isSmallScreen ? "none" : "flex" }}
+              >
                 <Button
                   variant="contained"
                   onClick={() => {
                     addItem(name, 1);
                   }}
-                  sx={{ backgroundColor: "#4169e1", color: "white" }} // Royal blue button
+                  sx={{
+                    backgroundColor: "#4169e1",
+                    color: "white",
+                    width: isSmallScreen ? "100%" : "auto",
+                  }}
                 >
                   Add
                 </Button>
@@ -238,7 +273,11 @@ export default function Home() {
                   onClick={() => {
                     removeItem(name);
                   }}
-                  sx={{ backgroundColor: "#4169e1", color: "white" }} // Royal blue button
+                  sx={{
+                    backgroundColor: "#4169e1",
+                    color: "white",
+                    width: isSmallScreen ? "100%" : "auto",
+                  }}
                 >
                   Remove
                 </Button>
