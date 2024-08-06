@@ -178,10 +178,11 @@ export default function Home() {
           variant="contained"
           onClick={handleOpen}
           sx={{
-            height: "56px",
+            height: isSmallScreen ? "40px" : "56px",
             width: isSmallScreen ? "80%" : isMediumScreen ? "200px" : "auto",
             backgroundColor: "#4169e1",
             color: "white",
+            fontSize: isSmallScreen ? "0.8rem" : "1rem",
           }}
         >
           Add New Item
@@ -193,7 +194,7 @@ export default function Home() {
           onChange={(e) => setSearchQuery(e.target.value)}
           sx={{
             width: isSmallScreen ? "80%" : isMediumScreen ? "300px" : "200px",
-            height: "56px",
+            height: isSmallScreen ? "40px" : "56px",
             backgroundColor: "white",
           }}
         />
@@ -204,6 +205,8 @@ export default function Home() {
           width: isSmallScreen ? "90%" : isMediumScreen ? "80%" : "950px",
           backgroundColor: "#f0f8ff",
           marginTop: 2,
+          maxHeight: "400px", // Fixed height for inventory items
+          overflowY: "auto", // Enable vertical scrolling
         }}
       >
         <Box
@@ -218,42 +221,49 @@ export default function Home() {
           </Typography>
         </Box>
 
-        <Stack
-          height="400px"
-          width="100%"
-          spacing={2}
-          overflow="auto"
-          padding={2}
-        >
+        <Stack spacing={2} padding={2}>
           {filteredInventory.map(({ name, quantity }) => (
             <Box
               key={name}
               width="100%"
               minHeight="10px"
-              display="grid"
-              gridTemplateColumns={
-                isSmallScreen
-                  ? "1fr 1fr"
-                  : isMediumScreen
-                  ? "2fr 1fr 2fr"
-                  : "2fr 1fr 3fr"
-              }
+              display="flex"
+              flexDirection={isSmallScreen ? "column" : "row"}
               alignItems="center"
               bgcolor="white"
               padding={2}
               borderBottom="1px solid #ddd"
+              sx={{ textAlign: isSmallScreen ? "center" : "left" }}
             >
-              <Typography variant="h6" color="#333" textAlign="left">
+              <Typography
+                variant="h6"
+                color="#333"
+                flex={isSmallScreen ? "1 0 auto" : "2"}
+                sx={{
+                  marginBottom: isSmallScreen ? "8px" : "0",
+                }}
+              >
                 {name.charAt(0).toUpperCase() + name.slice(1)}
               </Typography>
-              <Typography variant="h6" color="#333" textAlign="center">
+              <Typography
+                variant="h6"
+                color="#333"
+                flex={isSmallScreen ? "1 0 auto" : "1"}
+                sx={{
+                  marginBottom: isSmallScreen ? "8px" : "0",
+                }}
+              >
                 {quantity}
               </Typography>
               <Stack
                 direction="row"
-                spacing={2}
-                justifyContent="flex-end"
-                sx={{ display: isSmallScreen ? "none" : "flex" }}
+                spacing={1}
+                justifyContent={isSmallScreen ? "center" : "flex-end"}
+                flex={isSmallScreen ? "1 0 auto" : "3"}
+                sx={{
+                  flexWrap: isSmallScreen ? "wrap" : "nowrap",
+                  gap: isSmallScreen ? "4px" : "8px",
+                }}
               >
                 <Button
                   variant="contained"
@@ -263,7 +273,9 @@ export default function Home() {
                   sx={{
                     backgroundColor: "#4169e1",
                     color: "white",
-                    width: isSmallScreen ? "100%" : "auto",
+                    width: isSmallScreen ? "80px" : "auto",
+                    fontSize: isSmallScreen ? "0.7rem" : "1rem",
+                    padding: isSmallScreen ? "4px 8px" : "auto",
                   }}
                 >
                   Add
@@ -276,7 +288,9 @@ export default function Home() {
                   sx={{
                     backgroundColor: "#4169e1",
                     color: "white",
-                    width: isSmallScreen ? "100%" : "auto",
+                    width: isSmallScreen ? "80px" : "auto",
+                    fontSize: isSmallScreen ? "0.7rem" : "1rem",
+                    padding: isSmallScreen ? "4px 8px" : "auto",
                   }}
                 >
                   Remove
